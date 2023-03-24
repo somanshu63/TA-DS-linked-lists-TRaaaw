@@ -32,6 +32,113 @@
 ```js
 // Your code goes here
 
+class Node {
+  constructor(value) {
+    this.next = null;
+    this.value = value;
+  }
+}
+
+class LinkedList {
+  constructor(firstValue = null) {
+    this.head = firstValue ? new Node(firstValue) : firstValue;
+    this.tail = this.head;
+  }
+  insertHead(value) {
+    let node = new Node(value);
+    if (!this.head) {
+      this.head = this.tail = node;
+      return node;
+    }
+    node.next = this.head;
+    this.head = node;
+    return node;
+  }
+  insertTail(value) {
+    let node = new Node(value);
+    if (!this.tail) {
+      this.head = this.tail = node;
+      return node;
+    }
+    this.tail.next = node;
+    this.tail = node;
+    return node;
+  }
+  removeHead() {
+    if (!this.head) {
+      alert(`There is not items in the linked list`);
+      return;
+    }
+    let nodeToRemove = this.head;
+    this.head = nodeToRemove.next;
+    return nodeToRemove;
+  }
+
+  forEach(cb) {
+    let current = this.head;
+    while (current) {
+      cb(current.value);
+      current = current.next;
+    }
+  }
+  printAll() {
+    this.forEach(console.log);
+  }
+  size() {
+    let length = 0;
+    let current = this.head;
+    while (current) {
+      ++length;
+      current = current.next;
+    }
+    return length;
+  }
+  find(cb) {
+    let current = this.head;
+    while (current) {
+      if (cb(current.value)) {
+        return current.value;
+      }
+      current = current.next;
+    }
+    return -1;
+  }
+
+  findPrevNode(node) {
+    if (!node) {
+      return null;
+    }
+    if (node === this.head) {
+      return null;
+    }
+    let current = this.head;
+    while (current) {
+      if (current.next === node) {
+        break;
+      }
+      current = current.next;
+    }
+    return current;
+  }
+  removeTail() {
+    if (!this.tail) {
+      alert(`There is not items in the linked list`);
+      return;
+    }
+    let nodeToRemove = this.tail;
+    this.tail = this.findPrevNode(this.tail);
+
+    if (this.tail) {
+      this.tail.next = null;
+    }
+    if (nodeToRemove === this.head) {
+      this.head = null;
+    }
+
+    return nodeToRemove;
+  }
+}
+
 // Test
 let list = new LinkedList(10);
 list.insertHead(9);
