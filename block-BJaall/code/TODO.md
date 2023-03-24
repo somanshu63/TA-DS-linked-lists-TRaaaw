@@ -20,11 +20,38 @@ step-4: Now we will repeat the step 1, 2 and 3 but we will keep in mind not to t
 
 <!-- You answer -->
 
+Insertion sort
+step1:-In insertion sort we start from item at index 0 .as we move in future we will have two portions one on left is sorted array and 0one on right is unsorted array.
+
+step 2:- now when we are on index 1 we compare it to items on left and if its not in position then we swap it to the correct position.
+
+step3 :- now when we are on index 2 then we compare it with all 2 items on left and swap it if necessary.
+
+step 4 :- in this way we can sort whole array.
+
+selection sort
+step 1:- in seelection sort we have two pointers one current item and one current minimum.
+
+step2:- now we start by marking index 0 item as current minimum and current item.now we move current item to next item on right and if it is smaller than current minimum move pointer to it and repeat step until curretn item pointer is on last item .
+
+step3:- now we have to swap item on left with current minimum.once swapped now we have two portions on left sorted and on right unsorted.
+
+step4:- now we have to put both pointers on 2nd item and repeat all steps untill array is sorted.
+
 2. Create a function named `bubbleSort` that accepts an array of numbers and returns the array with sorted values. The elements should be in ascending order. Use the bubble sorting algorithms. After writing the function test it with an array and check if you are getting the right output.
 
 ```js
 function bubbleSort() {
   // your code
+  for (let i = 1; i < arr.length; i++) {
+    for (let j = 0; j < arr.length - 1; j++) {
+      if (arr[i] < arr[j]) {
+        let newVar = arr[j];
+        arr[j] = arr[i];
+        arr[i] = newVar;
+      }
+    }
+  }
 }
 ```
 
@@ -33,6 +60,17 @@ function bubbleSort() {
 ```js
 function selectionSort() {
   // your code
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < i; j++) {
+      if (arr[i] < arr[j]) {
+        let newVar = arr[i];
+        arr[i] = arr[j];
+        arr[j] = newVar;
+      }
+    }
+  }
+
+  return arr;
 }
 ```
 
@@ -41,6 +79,19 @@ function selectionSort() {
 ```js
 function insertionSort() {
   // your code
+  for (let i = 0; i < arr.length; i++) {
+    let mini = i;
+    for (let j = i + 1; j < arr.length + 1; j++) {
+      if (arr[j] < arr[mini]) {
+        mini = j;
+      }
+    }
+    let newVar = arr[i];
+    arr[i] = arr[mini];
+    arr[mini] = newVar;
+  }
+
+  return arr;
 }
 ```
 
